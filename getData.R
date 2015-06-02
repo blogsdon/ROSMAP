@@ -4,7 +4,7 @@ synapseLogin()
 synObj <- synGet('syn3505720')
 synClin <- synGet('syn3191087')
 synId <- synGet('syn3799513')
-
+#test
 fpkm <- read.delim(synObj@filePath,stringsAsFactors=F)
 clin <- read.delim(synClin@filePath,stringsAsFactors=F,sep=',')
 idkey <- read.delim(synId@filePath,stringsAsFactors=F,sep='\t')
