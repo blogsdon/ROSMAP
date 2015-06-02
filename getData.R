@@ -12,6 +12,7 @@ samp2 <- sapply(colnames(fpkm)[-c(1:2)],function(x){return(strsplit(strsplit(x,'
 
 idkey2 <- sapply(idkey$mirna_id,function(x){return(strsplit(x,'_')[[1]][2])})
 
+#test
 synmirna <- synGet('syn3387327')
 
 tab1 <- read.delim(synmirna@filePath,skip=2)
