@@ -21,6 +21,8 @@ qsub -v dataFile="../ROSMAP/ADrna.csv",pathv="/shared/ROSMAP/AD/",aracne=1,aracn
 qsub -v dataFile="../ROSMAP/ADrna.csv",pathv="/shared/metanetworkSynapse/",sparrowZ=1,sparrow2Z=1,lassoCV1se=1,lassoCVmin=1,lassoAIC=1,lassoBIC=1,ridgeCV1se=1,ridgeCVmin=1,ridgeAIC=1,ridgeBIC=1,genie3=1,tigress=1,numberCore=479,outputpath="/shared/ROSMAP/AD/" -pe orte 479 buildNet.sh
 qsub -v dataFile="../ROSMAP/ADrna.csv",pathv="/shared/ROSMAP/AD/",aracne=1,aracneFull=1,numberCore=1,outputpath="/shared/ROSMAP/AD/" -pe orte 1 buildNet.sh
 
+qsub -v dataFile="../ROSMAP/ADrna.csv",pathv="/shared/metanetworkSynapse/",lassoCV1se=1,lassoCVmin=1,lassoAIC=1,lassoBIC=1,ridgeCV1se=1,ridgeCVmin=1,ridgeAIC=1,ridgeBIC=1,genie3=1,tigress=1,numberCore=543,outputpath="/shared/ROSMAP/AD/" -pe orte 543 buildNet.sh
+
 #qsub -v dataFile="../CMC/controlData.csv",pathv="/shared/metanetworkSynapse/ARACNE/",aracne=1,correlation=1,numberCore=8 -pe orte 8 buildNet.sh
 #./pushNet.sh -a "syn3526285" -b "../CMC/code.txt" -c "../CMC/syn.txt" -defghijklmnopq -r "SVA" -s "HomoSapiens" -t "Schizophrenia" -u "DorsolateralPrefrontalCortex"
 #./cleanNet.sh
