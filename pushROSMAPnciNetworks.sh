@@ -11,4 +11,5 @@
 
 #nci
 #/shared/metanetworkSynapse/pushNet.sh -a "syn4545016" -b "/shared/ROSMAP/codeNCI.txt" -c "/shared/ROSMAP/syn.txt" -defghijklmnopqv -r "None" -s "HomoSapiens" -t "NCI" -u "DLPFC" -x "/shared/metanetworkSynapse/pushNetworkSynapse.R"
-/shared/metanetworkSynapse/pushNet.sh -a "syn4545016" -b "/shared/ROSMAP/codeNCI.txt" -c "/shared/ROSMAP/syn.txt" -defghijklmnopq -r "None" -s "HomoSapiens" -t "NCI" -u "DLPFC" -x "/shared/metanetworkSynapse/pushSparseNetworkSynapse.R"
+#/shared/metanetworkSynapse/pushNet.sh -a "syn4545016" -b "/shared/ROSMAP/codeNCI.txt" -c "/shared/ROSMAP/syn.txt" -dmnopq -r "None" -s "HomoSapiens" -t "NCI" -u "DLPFC" -x "/shared/metanetworkSynapse/pushSparseNetworkSynapse.R"
+/shared/metanetworkSynapse/pushNet.sh -a "syn4545016" -b "/shared/ROSMAP/codeNCI.txt" -c "/shared/ROSMAP/syn.txt" -dmnopq -r "None" -s "HomoSapiens" -t "NCI" -u "DLPFC" -x "/shared/metanetworkSynapse/pushSparseNetworkSynapse.R"
