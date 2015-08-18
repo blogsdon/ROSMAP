@@ -35,3 +35,19 @@ produceConsensusNetwork <- function(tags,ngenes,downloadLocation){
   
   return(consensusNetwork)
 }
+
+#function to produce a consensus Module
+produceConsensusModuleNetwork <- function(tags,ngenes,downloadLocation){}
+
+#function to generate modules from consensus
+fastGreedy <- function(consensus){}
+
+#function to run quick enrichments on consensus
+
+######TO DO:
+
+###build consensus
+###convert to markdown
+###push up to synapse
+###run enrichments
+###push results to Synapse
