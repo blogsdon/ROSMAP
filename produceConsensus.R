@@ -1,7 +1,7 @@
 ####function to produce consensus models.
 
 
-produceConsensusNetwork <- function(tags,ngenes){
+produceConsensusNetwork <- function(tags,ngenes,downloadLocation){
   #load necessary packages
   require(dplyr)
   require(Matrix)
@@ -16,7 +16,7 @@ produceConsensusNetwork <- function(tags,ngenes){
   
   #if necessary filter networkList
   networks <- networkList$file.id %>%
-              synGet()
+              synGet(downloadLocation=downloadLocation)
   
   #generate consensus matrix
   consensusNetwork <- 0 %>%
