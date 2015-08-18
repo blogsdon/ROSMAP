@@ -21,6 +21,7 @@ qsub -v dataFile="../ROSMAP/NCIrna.csv",pathv="/shared/metanetworkSynapse/",spar
 #new submissions
 qsub -v dataFile="../ROSMAP/NCIrna.csv",pathv="/shared/metanetworkSynapse/",lassoCVmin=1,ridgeCVmin=1,numberCore=479,outputpath="/shared/ROSMAP/NCI/" -pe orte 479 buildNet.sh
 qsub -v dataFile="../ROSMAP/NCIrna.csv",pathv="/shared/ROSMAP/NCI/",aracneFull=1,numberCore=1,outputpath="/shared/ROSMAP/NCI/" -pe orte 1 buildNet.sh
+qsub -v dataFile="../ROSMAP/NCIrna.csv",pathv="/shared/ROSMAP/NCI/",sparrowZ=1,numberCore=319,outputpath="/shared/ROSMAP/NCI/" -pe orte 319 buildNet.sh
 
 #qsub -v dataFile="../CMC/controlData.csv",pathv="/shared/metanetworkSynapse/ARACNE/",aracne=1,correlation=1,numberCore=8 -pe orte 8 buildNet.sh
 #./pushNet.sh -a "syn3526285" -b "../CMC/code.txt" -c "../CMC/syn.txt" -defghijklmnopq -r "SVA" -s "HomoSapiens" -t "Schizophrenia" -u "DorsolateralPrefrontalCortex"
