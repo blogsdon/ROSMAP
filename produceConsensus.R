@@ -3,20 +3,38 @@
 
 produceConsensusNetwork <- function(tags,ngenes,downloadLocation){
   #load necessary packages
+  require(synapseClient)
   require(dplyr)
   require(Matrix)
 
+  synapseLogin()
   #tags: filters for synQuery
-  mapTagsToString <- function(tags){}
+  mapTagsToString <- function(tags){
+    
+    foo <- paste0('select name,id from file where networkStorageType==\'',
+                  tags$networkStorageType,
+                  '\' and disease==\'',
+                  tags$disease,
+                  '\' and projectId==\'',
+                  tags$projectId,
+                  '\'')
+    return(foo)
+  }
   
   #get networks from synapse
   networkList <- tags %>%
               mapTagsToString() %>% 
               synQuery()
   
+  wkeep <- grep('.rda',networkList$file.name)
+  
+  
+  networkList <- networkList[wkeep,]
+  
   #if necessary filter networkList
   networks <- networkList$file.id %>%
-              synGet(downloadLocation=downloadLocation)
+              lapply(function(x,y){ return(synGet(x,downloadLocation=y))},
+                     downloadLocation)
   
   #generate consensus matrix
   consensusNetwork <- 0 %>%
