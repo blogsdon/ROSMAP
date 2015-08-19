@@ -10,5 +10,6 @@
 
 
 #ad
-/shared/metanetworkSynapse/pushNet.sh -a "syn4545005" -b "/shared/ROSMAP/codeAD.txt" -c "/shared/ROSMAP/syn.txt" -defghijklmnopqv -r "None" -s "HomoSapiens" -t "AD" -u "DLPFC" -x "/shared/metanetworkSynapse/pushNetworkSynapse.R"
+#/shared/metanetworkSynapse/pushNet.sh -a "syn4545005" -b "/shared/ROSMAP/codeAD.txt" -c "/shared/ROSMAP/syn.txt" -defghijklmnopqv -r "None" -s "HomoSapiens" -t "AD" -u "DLPFC" -x "/shared/metanetworkSynapse/pushNetworkSynapse.R"
 #/shared/metanetworkSynapse/pushNet.sh -a "syn4545005" -b "/shared/ROSMAP/codeAD.txt" -c "/shared/ROSMAP/syn.txt" -defghijklmnopq -r "None" -s "HomoSapiens" -t "AD" -u "DLPFC" -x "/shared/metanetworkSynapse/pushSparseNetworkSynapse.R"
+/shared/metanetworkSynapse/pushNet.sh -a "syn4545005" -b "/shared/ROSMAP/codeAD.txt" -c "/shared/ROSMAP/syn.txt" -y -r "None" -s "HomoSapiens" -t "AD" -u "DLPFC" -x "/shared/metanetworkSynapse/pushSparseNetworkSynapse.R"
