@@ -76,7 +76,47 @@ require(metanetwork)
 
 
 #function to produce a consensus Module
-produceConsensusModuleNetwork <- function(tags,ngenes,downloadLocation){}
+produceConsensusModuleNetwork <- function(tags,ngenes,downloadLocation){
+  
+  
+  
+  
+  buildAdjacency <- function(df){
+    mat <- df$moduleNumber%*%t(df$moduleNumber)
+    gc()
+    mat <- mat%in%unique(df$moduleNumber^2)
+    gc()
+    mat <- matrix(mat,nrow(df),nrow(df))
+    gc()
+    colnames(mat) <- df$GeneIDs
+    gc()
+    rownames(mat) <- df$GeneIDs
+    gc()
+    return(mat)
+  }
+  
+  
+  
+  sieve <- function(n){
+    n <- as.integer(n)
+    if(n > 1e6) stop("n too large")
+    primes <- rep(TRUE, n)
+    primes[1] <- FALSE
+    last.prime <- 2L
+    for(i in last.prime:floor(sqrt(n)))
+    {
+      primes[seq.int(2L*last.prime, n, last.prime)] <- FALSE
+      last.prime <- last.prime + min(which(primes[(last.prime+1):n]))
+    }
+    which(primes)
+  }
+  alternativeModulesId<-(sieve(2.6068e5))
+  
+  
+  
+  
+  
+}
 
 #function to generate modules from consensus
 fastGreedy <- function(consensus){}
