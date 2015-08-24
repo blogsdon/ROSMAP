@@ -94,6 +94,22 @@ require(data.table);
 expr <- fread(exprFile@filePath,header=T)
 expr <- data.frame(expr)
 
+####wgcna
+library(WGCNA)
+expr2 <- t(expr[,-c(1,2)])
+colnames(expr2) <- expr$ensembl_gene_id
+corMat <- cor(expr2)
+
+powers = c(c(1:10), seq(from = 12, to=20, by=2))
+sft = pickSoftThreshold.similarity(similarity=corMat, powerVector = powers, verbose = 5)
+softPower = 22
+
+adjacency = adjacency.fromSimilarity(similarity = corMat,power = softPower)
+
+TOM = TOMsimilarity(adjacency);
+dissTOM = 1-TOM
+
+
 hgnc <- expr$hgnc_symbol
 names(hgnc) <- expr$ensembl_gene_id
 
