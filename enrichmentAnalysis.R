@@ -65,9 +65,43 @@ networkObj <- synGet(foo$file.id[1])
 modulesObj <- synGet(foo$file.id[2])
 enrichmentObj <- synGet(foo$file.id[3])
 nodeProperities <- synGet(foo$file.id[4])
+enrichmentAllObj <- synGet(foo$file.id[5])
 
 enrichments <- fread(enrichmentObj@filePath) %>% data.frame
 enrichments <- arrange(enrichments,pval)
+
+enrichmentsAll <- fread(enrichmentAllObj@filePath) %>% data.frame
+enrichmentsAll <- arrange(enrichmentsAll,(fdr))
+
+turquoise <- filter(enrichmentsAll,ComparisonName=='turquoise')
+
+#brownSplit <- lapply(names(table(brown$category)),function(x,y) return(filter(y,category==x)),brown)
+#names(brownSplit) <- names(table(brown$category))
+
+
+red <- filter(enrichmentsAll,ComparisonName=='red')
+redSplit <- lapply(names(table(red$category)),function(x,y) return(filter(y,category==x)),red)
+names(redSplit) <- names(table(red$category))
+summaryred <- do.call(rbind,lapply(redSplit,function(x) return(x[1:5,c('GeneSetName','category','pval','noverlap','OR','fdr')])))
+summaryred <- arrange(summaryred,fdr)
+
+#gene lists for modules
+
+
+
+synapseClient::synapseLogin()
+
+
+tgObj <- synGet('syn4893059')
+load(tgObj@filePath)
+
+masterList <- unique(unlist(GeneSets))
+fullList <- data.frame(gene=masterList)
+for(i in 1:17){
+  fullList[names(GeneSets)[i]] <- masterList%in%GeneSets[[i]]
+}
+write.csv(fullList,file='~/Desktop/adAnnos.csv',quote=F,row.names=F)
+
 astrocyte <- filter(enrichments,GeneSetName=='Zhang:Astrocyte')
 microglia <- filter(enrichments,GeneSetName=='Zhang:Microglia')
 neuron <- filter(enrichments,GeneSetName=='Zhang:Neuron')
@@ -94,20 +128,7 @@ require(data.table);
 expr <- fread(exprFile@filePath,header=T)
 expr <- data.frame(expr)
 
-####wgcna
-library(WGCNA)
-expr2 <- t(expr[,-c(1,2)])
-colnames(expr2) <- expr$ensembl_gene_id
-corMat <- cor(expr2)
 
-powers = c(c(1:10), seq(from = 12, to=20, by=2))
-sft = pickSoftThreshold.similarity(similarity=corMat, powerVector = powers, verbose = 5)
-softPower = 22
-
-adjacency = adjacency.fromSimilarity(similarity = corMat,power = softPower)
-
-TOM = TOMsimilarity(adjacency);
-dissTOM = 1-TOM
 
 
 hgnc <- expr$hgnc_symbol
