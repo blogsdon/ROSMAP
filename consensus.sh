@@ -8,4 +8,4 @@
 #$ -o rc_out.txt
 
 rm aggregateRank.rda
-Rscript consensus.R
+Rscript /shared/ROSMAP/consensus.R
