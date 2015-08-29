@@ -16,4 +16,5 @@
 #/shared/metanetworkSynapse/pushNet.sh -a "syn4545016" -b "/shared/ROSMAP/codeNCI.txt" -c "/shared/ROSMAP/syn.txt" -dv -r "None" -s "HomoSapiens" -t "NCI" -u "DLPFC" -x "/shared/metanetworkSynapse/pushNetworkSynapse.R"
 #/shared/metanetworkSynapse/pushNet.sh -a "syn4545016" -b "/shared/ROSMAP/codeNCI.txt" -c "/shared/ROSMAP/syn.txt" -d -r "None" -s "HomoSapiens" -t "NCI" -u "DLPFC" -x "/shared/metanetworkSynapse/pushSparseNetworkSynapse.R"
 #/shared/metanetworkSynapse/pushNet.sh -a "syn4545016" -b "/shared/ROSMAP/codeNCI.txt" -c "/shared/ROSMAP/syn.txt" -defghijklmnopq -r "None" -s "HomoSapiens" -t "NCI" -u "DLPFC" -x "/shared/metanetworkSynapse/pushSparseNetworkSynapse.R"
-/shared/metanetworkSynapse/pushNet.sh -a "syn4545016" -b "/shared/ROSMAP/codeNCI.txt" -c "/shared/ROSMAP/syn.txt" -fg -r "None" -s "HomoSapiens" -t "NCI" -u "DLPFC" -x "/shared/metanetworkSynapse/pushSparseNetworkSynapse.R"
+#/shared/metanetworkSynapse/pushNet.sh -a "syn4545016" -b "/shared/ROSMAP/codeNCI.txt" -c "/shared/ROSMAP/syn.txt" -fg -r "None" -s "HomoSapiens" -t "NCI" -u "DLPFC" -x "/shared/metanetworkSynapse/pushSparseNetworkSynapse.R"
+/shared/metanetworkSynapse/pushNet.sh -a "syn4545016" -b "/shared/ROSMAP/codeNCI.txt" -c "/shared/ROSMAP/syn.txt" -z -r "None" -s "HomoSapiens" -t "NCI" -u "DLPFC" -x "/shared/metanetworkSynapse/pushSparseNetworkSynapse.R"

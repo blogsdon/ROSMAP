@@ -8,3 +8,6 @@ code.txt
 data.csv
 syn.txt
 truth.csv
+fullNetwork.png
+rosmap.cys
+test.R
