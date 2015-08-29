@@ -40,7 +40,7 @@ sapply(methods,internal,whichUpperTri)
 rm(list=ls())
 gc()
 
-load('aggergateRank.rda')
+load('aggregateRank.rda')
 finalRank <- rank(-aggregateRank,ties.method = 'min')
 finalRank <- finalRank/max(finalRank)
 
