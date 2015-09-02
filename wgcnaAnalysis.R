@@ -1,6 +1,6 @@
 ####
 #library(WGCNA)
-
+require(synapseClient,warn.conflicts = F,quietly = T)
 synapseClient::synapseLogin()
 exprFile <- synGet('syn4259377')
 require(data.table);
