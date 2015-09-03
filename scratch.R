@@ -246,6 +246,17 @@ adAnalysisResults<-grabNetworkAnalysisResults('rankconsensus','sparrow2Bonferron
 #grabNetworkAnalysisResults('rankconsensus','sparrow2Bonferroni','MCI','syn2397881')
 nciAnalysisResults<-grabNetworkAnalysisResults('rankconsensus','sparrow2Bonferroni','NCI','syn2397881')
 
+
+
+adAnalysisResults$enrichments <- arrange(adAnalysisResults$enrichments,fdr)
+adAstrocyte <- filter(adAnalysisResults$enrichments,ComparisonName=='brown')
+
+nciAnalysisResults$enrichments <- arrange(nciAnalysisResults$enrichments,fdr)
+nciAstrocyte <- filter(nciAnalysisResults$enrichments,ComparisonName=='turquoise')
+
+
+
+
 adADenrichments <- populateADenrichments(adAnalysisResults)
 nciADenrichments <- populateADenrichments(nciAnalysisResults)
 
