@@ -12,7 +12,7 @@ echo "https://github.com/blogsdon/ROSMAP/blob/master/runROSMAPbraak56.sh" >> cod
 echo "https://github.com/blogsdon/ROSMAP/blob/master/getROSMAPrnaseqBraak.R" >> codeBraak56.txt
 
 cd /shared/metanetworkSynapse/
-qsub -v dataFile="/shared/ROSMAP/BRAAK56rna.csv",pathv="/shared/metanetworkSynapse/",sparrowZ=1,sparrow2Z=1,lassoCV1se=1,lassoCVmin=1,lassoAIC=1,lassoBIC=1,ridgeCV1se=1,ridgeCVmin=1,ridgeAIC=1,ridgeBIC=1,genie3=1,tigressRootN=1,elasticNetAIC=1,elasticNetBIC=1,elasticNetCVmin=1,elasticNetCV1se=1,numberCore=150,outputpath="/shared/ROSMAP/BRAAK56/" -pe orte 150 buildNet.sh
+qsub -v dataFile="/shared/ROSMAP/BRAAK56rna.csv",pathv="/shared/metanetworkSynapse/",sparrowZ=1,sparrow2Z=1,lassoCV1se=1,lassoCVmin=1,lassoAIC=1,lassoBIC=1,ridgeCV1se=1,ridgeCVmin=1,ridgeAIC=1,ridgeBIC=1,genie3=1,tigressRootN=1,elasticNetAIC=1,elasticNetBIC=1,elasticNetCVmin=1,elasticNetCV1se=1,numberCore=200,outputpath="/shared/ROSMAP/BRAAK56/" -pe orte 200 buildNet.sh
 #qsub -v dataFile="../ROSMAP/NCIrna.csv",pathv="/shared/ROSMAP/NCI/",aracne=1,aracneFull=1,correlation=1,correlationBonferroni=1,correlationFDR=1,wgcna=1,numberCore=1,outputpath="/shared/ROSMAP/NCI/" -pe orte 1 buildNet.sh
 #qsub -v dataFile="../ROSMAP/NCIrna.csv",pathv="/shared/ROSMAP/NCI/",aracne=1,aracneFull=1,numberCore=1,outputpath="/shared/ROSMAP/NCI/" -pe orte 1 buildNet.sh
 #qsub -v dataFile="../ROSMAP/NCIrna.csv",pathv="/shared/metanetworkSynapse/",sparrowZ=1,sparrow2Z=1,lassoCVmin=1,ridgeCVmin=1,numberCore=150,outputpath="/shared/ROSMAP/NCI/" -pe orte 150 buildNet.sh
