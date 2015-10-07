@@ -155,16 +155,21 @@ grabNetworkAnalysisResults <- function(method,sparsityMethod,disease,projectId){
   cat(queryStatement,'\n')
   foo <- synQuery(queryStatement)  
   bar <- lapply(foo$file.id,synGet)
-  load(bar[[1]]@filePath)
+  load(bar[[which(foo$file.name=='rankconsensussparrow2Bonferroni.rda')]]@filePath)
   require(dplyr)
   require(data.table)
   sparrow2Sparse <- list(network=sparseNetwork,
-                         modules=fread(bar[[2]]@filePath)%>%data.frame,
-                         nodeProperties=fread(bar[[3]]@filePath)%>%data.frame,
-                         enrichments=fread(bar[[4]]@filePath)%>%data.frame)
+                         modules=fread(bar[[which(foo$file.name=='rankconsensussparrow2Bonferroni fast_greedy Modules')]]@filePath)%>%data.frame,
+                         nodeProperties=fread(bar[[which(foo$file.name=='rankconsensussparrow2Bonferroni Node Properties')]]@filePath)%>%data.frame,
+                         enrichments=fread(bar[[which(foo$file.name=='rankconsensussparrow2Bonferroni fast_greedy Enrichment Fisher')]]@filePath)%>%data.frame)
   sparrow2Sparse$enrichments <- arrange(sparrow2Sparse$enrichments,fdr)
   return(sparrow2Sparse)  
 }
+method <- 'rankconsensus'
+sparsityMethod <- 'sparrow2Bonferroni'
+disease <- 'AD'
+projectId <- 'syn2397881'
+
 
 populateADenrichments <- function(x){
   require(dplyr)
