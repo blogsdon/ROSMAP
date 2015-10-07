@@ -252,14 +252,15 @@ adAnalysisResults<-grabNetworkAnalysisResults('rankconsensus','sparrow2Bonferron
 nciAnalysisResults<-grabNetworkAnalysisResults('rankconsensus','sparrow2Bonferroni','NCI','syn2397881')
 
 
-
 adAnalysisResults$enrichments <- arrange(adAnalysisResults$enrichments,fdr)
 adAstrocyte <- filter(adAnalysisResults$enrichments,ComparisonName=='brown')
+
 
 nciAnalysisResults$enrichments <- arrange(nciAnalysisResults$enrichments,fdr)
 nciAstrocyte <- filter(nciAnalysisResults$enrichments,ComparisonName=='turquoise')
 
-
+makeFilesForCytoscape(adAnalysisResults,'adnet.csv','admod.csv')
+makeFilesForCytoscape(nciAnalysisResults,'ncinet.csv','ncimod.csv')
 
 
 adADenrichments <- populateADenrichments(adAnalysisResults)
