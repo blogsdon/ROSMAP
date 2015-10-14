@@ -19,7 +19,7 @@ synClin <- synGet('syn3191087')
 names(synObj) <- exprDataSets$file.name
 names(synObjBraak) <- braakDataSets$file.name
 
-rosmapRNAseqResiduals <- fread(synObjBraak[[3]]@filePath,stringsAsFactors=F,data.table=F,header=T)
+rosmapRNAseqResiduals <- fread(synObj[[5]]@filePath,stringsAsFactors=F,data.table=F,header=T)
 rosmapClinical <- fread(synClin@filePath,stringsAsFactors=F,data.table=F)
 
 
@@ -41,7 +41,7 @@ rosmapClinical <- rosmapClinical[ind1[rnaseq_samples],]
 #harmonize
 
 #look at braaksc
-table(rosmapClinical$braaksc)
+table(rosmapClinical$cogdx)
 
 #We are going to create NCI, MCI, and AD data-sets
 NCIrna <- rosmapRNAseqResiduals[,as.character(c('ensembl_gene_id','hgnc_symbol',rosmapClinical$projid[rosmapClinical$cogdx==1]))]
