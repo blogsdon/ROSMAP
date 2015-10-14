@@ -23,6 +23,9 @@ qsub -v dataFile="../ROSMAP/NCIrna.csv",pathv="/shared/metanetworkSynapse/",lass
 qsub -v dataFile="../ROSMAP/NCIrna.csv",pathv="/shared/ROSMAP/NCI/",aracneFull=1,numberCore=1,outputpath="/shared/ROSMAP/NCI/" -pe orte 1 buildNet.sh
 qsub -v dataFile="../ROSMAP/NCIrna.csv",pathv="/shared/ROSMAP/NCI/",sparrowZ=1,numberCore=319,outputpath="/shared/ROSMAP/NCI/" -pe orte 319 buildNet.sh
 
+qsub -v s3="s3://metanetworks/ROSMAP/NCI/",dataFile="/shared/ROSMAP/NCIrna.csv",pathv="/shared/metanetworkSynapse/",tigressRootN=1,elasticNetAIC=1,elasticNetBIC=1,elasticNetCVmin=1,elasticNetCV1se=1,numberCore=320,outputpath="/shared/ROSMAP/NCI/" -pe orte 320 -S /bin/bash -V -cwd -N rosmapNCI -e /shared/ROSMAP/NCI/error.txt -o /shared/ROSMAP/NCI/out.txt buildNet.sh
+
+
 #qsub -v dataFile="../CMC/controlData.csv",pathv="/shared/metanetworkSynapse/ARACNE/",aracne=1,correlation=1,numberCore=8 -pe orte 8 buildNet.sh
 #./pushNet.sh -a "syn3526285" -b "../CMC/code.txt" -c "../CMC/syn.txt" -defghijklmnopq -r "SVA" -s "HomoSapiens" -t "Schizophrenia" -u "DorsolateralPrefrontalCortex"
 #./cleanNet.sh
