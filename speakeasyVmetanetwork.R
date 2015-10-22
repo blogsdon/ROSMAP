@@ -1,30 +1,75 @@
 #function to analyze both networks.
-load('rankconsensussparrow2Bonferroni.rda')
+#load('rankconsensussparrow2Bonferroni.rda')
+require(synapseClient)
+synapseLogin()
 require(data.table)
 
-mods <- fread('rankconsensussparrow2Bonferroni.fast_greedy.tsv',
+adMods <- synGet('syn4921528')
+
+
+modsad <- fread(adMods@filePath,
               data.table=F,
               stringsAsFactors=F)
 
-enrichments <- fread('rankconsensussparrow2Bonferroni_fast_greedy_Enrichment_enrichmentResults.tsv',
+mciMods <- synGet('syn4921537')
+
+
+modsmci <- fread(mciMods@filePath,
+              data.table=F,
+              stringsAsFactors=F)
+
+nciMods <- synGet('syn4921556')
+
+
+modsnci <- fread(nciMods@filePath,
+                 data.table=F,
+                 stringsAsFactors=F)
+
+
+adEnr <- synGet('syn4922032')
+
+enrichments <- fread(adEnr@filePath,
                      data.table=F,
                      stringsAsFactors = F)
 
-speakEasy <- fread('ROSMAP_SpeakEasy_genesymbols_clusterid.csv',
+speakEasyObj <- synGet('syn4974979')
+
+speakEasy <- fread(speakEasyObj@filePath,
                    data.table=F,
                    stringsAsFactors = F)
 
-expr <- fread('~/.synapseCache/105/5276105/ResidualGeneExpression.tsv')
+
+speakEasyOntObj <- synGet('syn4974978')
+
+
+
+
+exprFile <- synGet('syn4259377')
+require(data.table);
+expr <- fread(exprFile@filePath,header=T,stringsAsFactors=F,data.table=F)
 expr <- data.frame(expr)
-colnames(expr) <- expr[1,]
-expr <- expr[-1,]
 dim(expr)
 
 hgnc <- expr$hgnc_symbol
 names(hgnc) <- expr$ensembl_gene_id
-mods$hgnc <- hgnc[mods$GeneIDs]
+modsad$hgnc <- hgnc[mods$GeneIDs]
 
 require(dplyr)
+
+####merge datasets
+speakEasyAndMetaNetwork <- merge(modsad,modsnci,by='GeneIDs')
+speakEasyAndMetaNetwork <- speakEasyAndMetaNetwork[,c(1,4,3,6)]
+colnames(speakEasyAndMetaNetwork)[c(3,4)] <- c('ModuleLabelsAD','ModuleLabelsNCI')
+speakEasyAndMetaNetwork <- merge(speakEasyAndMetaNetwork,modsmci,by='GeneIDs')
+speakEasyAndMetaNetwork <- speakEasyAndMetaNetwork[,-5]
+colnames(speakEasyAndMetaNetwork)[5] <- 'ModeuleLabelsMCI'
+speakEasyAndMetaNetwork <- merge(speakEasyAndMetaNetwork,speakEasy,by.x='hgnc',by.y='V1')
+colnames(speakEasyAndMetaNetwork)[6] <- 'ModelLabelsSpeakEasy'
+
+write.csv(speakEasyAndMetaNetwork,file='ROSMAP_metanetwork_speakeasy_modules.csv',quote=F)
+foo <- File('ROSMAP_metanetwork_speakeasy_modules.csv',parentId='syn4907617')
+foo <- synStore(foo)
+
 
 table1 <- table(mods$moduleNumber)
 wbig <- names(which(table1>20))
@@ -92,7 +137,7 @@ rownames(enrTable) <- names(table(sEmodsKeep$V2))
 colnames(enrTable) <- names(table(mNmodsKeep$modulelabels))
 
 enrTable2 <- enrTable
-enrTable2[which(pvalTable < 0.05/(47*21))] <- 0
+enrTable2[which(pvalTable > 0.05/(47*21))] <- 0
 
 library(gplots)
 #o1 <- apply(enrTable2,1,order,decreasing=T)
@@ -134,11 +179,16 @@ pvalTableB <- pvalTable
 pvalTableB[which(pvalTable > 0.05/(47*21))]<-0
 pvalTableB[which(pvalTable < 0.05/(47*21))]<-1
 addIndex <- c(perm2$rowInd,which(!(1:nrow(pvalTableB))%in%perm2$rowInd))
+#addIndex2 <- c(perm1$rowInd,which(!(1:nrow(enrTable3))%in%perm1$rowInd))
+pvalTable2 <- pvalTableB[(addIndex),rev(perm2$colInd)]
 
-pvalTable2 <- pvalTableB[rev(addIndex),(perm2$colInd)]
-heatmap.2(t(sqrt(enrTable3)),scale='none',Rowv=NA,Colv=NA,trace='none')
+heatmap.2(t(sqrt(enrTable3)),scale='none',Rowv=NA,Colv=NA,trace='none',col=pal1(50))
 #heatmap.2((t(-log10(pvalTable2)))^(1/4),Rowv=NA,Colv=NA,trace='none')
-heatmap((pvalTable2),Rowv=NA,Colv=NA,scale='none')
+
+library(RColorBrewer)
+pal1 <- colorRampPalette(c('white','black'))
+
+heatmap(t(pvalTable2),Rowv=NA,Colv=NA,scale='none',col=pal1(50))
 
 #####make a blockwise gene plot
 
@@ -161,7 +211,7 @@ sEmodsKeep3 <- sEmodsKeep2[rowIndexVec,]
 
 enrichments <- arrange(enrichments,fdr)
 
-go2 <- fread('ROSMAP_SpeakEasy_ontology.001.csv',
+go2 <- fread(speakEasyOntObj@filePath,
              data.table=F,
              stringsAsFactors=T)
 which(apply(pvalTable2,1,sum)==0)
