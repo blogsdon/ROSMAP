@@ -1,0 +1,14 @@
+result_elasticNetAIC.rda
+result_elasticNetBIC.rda
+result_elasticNetCV1se.rda
+result_elasticNetCVmin.rda
+result_lassoAIC.rda
+result_lassoBIC.rda
+result_lassoCV1se.rda
+result_lassoCVmin.rda
+result_ridgeAIC.rda
+result_ridgeBIC.rda
+result_ridgeCV1se.rda
+result_ridgeCVmin.rda
+result_sparrow2Z.rda
+result_sparrowZ.rda
