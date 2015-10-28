@@ -9,6 +9,7 @@ echo "syn3191087" > synFile.txt
 echo "syn4935408" >> synFile.txt
 
 aws s3 cp s3://metanetworks/ROSMAP/BRAAK12/result_rankConsensus.rda /shared/ROSMAP/
+aws s3 cp s3://metanetworks/ROSMAP/BRAAK12/sparsity.csv /shared/ROSMAP/
 /shared/metanetworkSynapse/pushNet.sh -a "syn5014784" -b "/shared/ROSMAP/codeFile.txt" -c "/shared/ROSMAP/synFile.txt" -z -r "None" -s "HomoSapiens" -t "BRAAK12" -u "DLPFC" -x "/shared/metanetworkSynapse/pushSparseNetworkSynapse.R"
 
 
@@ -20,6 +21,7 @@ echo "https://github.com/blogsdon/ROSMAP/blob/master/pushBraakRankConsensus.sh" 
 #echo "syn4935408" >> synFile.txt
 
 aws s3 cp s3://metanetworks/ROSMAP/BRAAK34/result_rankConsensus.rda /shared/ROSMAP/
+aws s3 cp s3://metanetworks/ROSMAP/BRAAK34/sparsity.csv /shared/ROSMAP/
 /shared/metanetworkSynapse/pushNet.sh -a "syn5014785" -b "/shared/ROSMAP/codeFile.txt" -c "/shared/ROSMAP/synFile.txt" -z -r "None" -s "HomoSapiens" -t "BRAAK34" -u "DLPFC" -x "/shared/metanetworkSynapse/pushSparseNetworkSynapse.R"
 
 
@@ -31,4 +33,5 @@ echo "https://github.com/blogsdon/ROSMAP/blob/master/pushBraakRankConsensus.sh" 
 #echo "syn4935408" >> synFile.txt
 
 aws s3 cp s3://metanetworks/ROSMAP/BRAAK56/result_rankConsensus.rda /shared/ROSMAP/
+aws s3 cp s3://metanetworks/ROSMAP/BRAAK56/sparsity.csv /shared/ROSMAP/
 /shared/metanetworkSynapse/pushNet.sh -a "syn5014786" -b "/shared/ROSMAP/codeFile.txt" -c "/shared/ROSMAP/synFile.txt" -z -r "None" -s "HomoSapiens" -t "BRAAK56" -u "DLPFC" -x "/shared/metanetworkSynapse/pushSparseNetworkSynapse.R"
