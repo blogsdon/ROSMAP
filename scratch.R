@@ -165,6 +165,42 @@ grabNetworkAnalysisResults <- function(method,sparsityMethod,disease,projectId){
   sparrow2Sparse$enrichments <- arrange(sparrow2Sparse$enrichments,fdr)
   return(sparrow2Sparse)  
 }
+
+
+grabNetworkAnalysisResults2 <- function(method,sparsityMethod,disease,projectId){
+  require(synapseClient)
+  synapseLogin()
+  queryStatement <- paste0('select name,id from file where projectId==\'',projectId,'\' and disease==\'',disease,'\' and sparsityMethod==\'',sparsityMethod,'\' and method ==\'',method,'\'')
+  cat(queryStatement,'\n')
+  foo <- synQuery(queryStatement)  
+  bar <- lapply(foo$file.id,synGet)
+  load(bar[[which(foo$file.name=='rankconsensussparrow2Bonferroni.rda')]]@filePath)
+  require(dplyr)
+  require(data.table)
+  sparrow2Sparse <- list(network=sparseNetwork,
+                         modules=fread(bar[[which(foo$file.name=='rankconsensussparrow2Bonferroni fast_greedy Modules')]]@filePath)%>%data.frame,
+                         enrichments=fread(bar[[which(foo$file.name=='rankconsensussparrow2Bonferroni fast_greedy Enrichment Fisher')]]@filePath)%>%data.frame)
+  sparrow2Sparse$enrichments <- arrange(sparrow2Sparse$enrichments,fdr)
+  return(sparrow2Sparse)  
+}
+
+grabNetworkAnalysisResults3 <- function(method,sparsityMethod,disease,projectId,tissueType){
+  require(synapseClient)
+  synapseLogin()
+  queryStatement <- paste0('select name,id from file where projectId==\'',projectId,'\' and disease==\'',disease,'\' and sparsityMethod==\'',sparsityMethod,'\' and method ==\'',method,'\' and tissueType==\'',tissueType,'\'')
+  cat(queryStatement,'\n')
+  foo <- synQuery(queryStatement)  
+  bar <- lapply(foo$file.id,synGet)
+  load(bar[[which(foo$file.name=='rankconsensussparrow2Bonferroni.rda')]]@filePath)
+  require(dplyr)
+  require(data.table)
+  sparrow2Sparse <- list(network=sparseNetwork,
+                         modules=fread(bar[[which(foo$file.name=='rankconsensussparrow2Bonferroni fast_greedy Modules')]]@filePath)%>%data.frame,
+                         enrichments=fread(bar[[which(foo$file.name=='rankconsensussparrow2Bonferroni fast_greedy Enrichment Fisher')]]@filePath)%>%data.frame)
+  sparrow2Sparse$enrichments <- arrange(sparrow2Sparse$enrichments,fdr)
+  return(sparrow2Sparse)  
+}
+
 method <- 'rankconsensus'
 sparsityMethod <- 'sparrow2Bonferroni'
 disease <- 'AD'
