@@ -26,3 +26,4 @@ ncinet.csv
 dataForComparison
 ROSMAP_metanetwork_speakeasy_modules.csv
 rosmapRNAseq.csv
+makeConsensus.sh
