@@ -31,6 +31,7 @@ colnames(semods) <- c('hgncName','speakeasyModule')
 
 combinedModules <- data.frame(geneName=newMods$geneName,hgncName=semods$hgncName,speakeasyModule=semods$speakeasyModule,metanetworkModule=newMods$metanetworkModule,stringsAsFactors=F)
 
+write.csv(combinedModules,file='ROSMAP_metanetwork_speakeasy_modules.csv',quote=F)
 
 ppi <- synGet('syn4896428')
 load(ppi@filePath)
