@@ -9,4 +9,4 @@ echo "https://github.com/blogsdon/ROSMAP/blob/master/runRosmapCross.sh" > codeRo
 
 aws s3 cp s3://metanetworks/ROSMAP/CROSS/result_rankConsensus.rda ./
 aws s3 cp s3://metanetworks/ROSMAP/CROSS/sparsity.csv ./
-../metanetworkSynapse/pushNet.sh -a "syn5177040" -b "codeRosmapCross.txt" -c "synRosmapCross.txt" -z -r "None" -s "HomoSapiens" -t "NCI_MCI_AD" -u "DLPFC" -x "metanetworkSynapse/pushSparseNetworkSynapse.R"
+../metanetworkSynapse/pushNet.sh -a "syn5177040" -b "codeRosmapCross.txt" -c "synRosmapCross.txt" -z -r "None" -s "HomoSapiens" -t "NCI_MCI_AD" -u "DLPFC" -x "../metanetworkSynapse/pushSparseNetworkSynapse.R"
