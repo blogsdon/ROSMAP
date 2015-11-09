@@ -21,6 +21,7 @@ makeFilesForCytoscape <- function(x,networkFile,moduleFile){
   require(dplyr)
   nMods <- sum(table(x$modules$moduleNumber)>20)
   mods <- filter(x$modules,moduleNumber%in%1:nMods)
+  x$network <- x$network %>% as.matrix
   allAdj <- x$network[mods$GeneIDs,mods$GeneIDs] %>% as.matrix
   library(metanetwork)
   alledgeList <- rankedEdgeList(allAdj,symmetric=T)
