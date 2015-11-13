@@ -1,5 +1,6 @@
 #!/bin/bash
 
+Rscript ../metanetworkSynapse/pushConsensus.R "methods.txt" "s3://metanetworks/ROSMAP/CROSS2/"
 
 echo "syn4922930" > synRosmapCross.txt
 echo "syn4922926" >> synRosmapCross.txt
