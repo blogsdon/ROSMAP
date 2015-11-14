@@ -26,12 +26,22 @@ bar <- dplyr::mutate(bar,
                       metanetworkModuleCount=internal(metanetworkModule,geneName))
 #bar3 <- filter(bar2,speakEasyModuleCount>19  megenaModuleCount>19 & metanetworkModuleCount > 19)
 
+countTable <- c()
+
 newMat <- filter(bar,speakEasyModuleCount>19)
 speakEasyMods <- unique(newMat$speakeasyModule)
+countTable <- c(countTable,length(speakEasyMods))
 newMat <- filter(bar,megenaModuleCount>19)
 megenaMods <- unique(newMat$megenaModule)
+countTable <- c(countTable,length(megenaMods))
 newMat <- filter(bar,metanetworkModuleCount>19)
 metanetworkMods <- unique(newMat$metanetworkModule)
+countTable <- c(countTable,length(metanetworkMods))
+
+nModTable <- data.frame(modSize=as.numeric(countTable),method=c('SpeakEasy','Metanetwork','MEGENA'))
+
+barplot(nModTable$modSize)
+
 
 newMat <- filter(bar,speakEasyModuleCount>19)
 speakEasyList <- sapply(speakEasyMods,
@@ -82,21 +92,60 @@ fisherWrapperPval <- function(moduleGenes,annotationGenes,allGenes){
   return(foo$p.value)
 }
 
-speakeasyVmetanetworkPval <- biSapply(fisherWrapperPval,speakEasyList,metanetworkList,unique(bar$geneName))
+speakeasyVmetanetworkPval <- t(biSapply(fisherWrapperPval,speakEasyList,metanetworkList,unique(bar$geneName)))
+speakeasyVmetanetworkOR <- t(biSapply(fisherWrapperOR,speakEasyList,metanetworkList,unique(bar$geneName)))
 sEmNThres <- speakeasyVmetanetworkPval
-sEmNThres[speakeasyVmetanetworkPval>0.05/(18053)] <- 0
-sEmNThres[speakeasyVmetanetworkPval<=0.05/(18053)] <- 1
+sEmNThres[speakeasyVmetanetworkPval>0.05/(18302)] <- 0
+sEmNThres[speakeasyVmetanetworkPval<=0.05/(18302)] <- 1
 
-speakeasyVmegenaPval <- biSapply(fisherWrapperPval,speakEasyList,megenaList,unique(bar$geneName))
+speakeasyVmegenaPval <- t(biSapply(fisherWrapperPval,speakEasyList,megenaList,unique(bar$geneName)))
+speakeasyVmegenaOR <- t(biSapply(fisherWrapperOR,speakEasyList,megenaList,unique(bar$geneName)))
 sEmGThres <- speakeasyVmegenaPval
-sEmGThres[speakeasyVmegenaPval>0.05/(18053)] <- 0
-sEmGThres[speakeasyVmegenaPval<=0.05/(18053)] <- 1
+sEmGThres[speakeasyVmegenaPval>0.05/(18302)] <- 0
+sEmGThres[speakeasyVmegenaPval<=0.05/(18302)] <- 1
 
-metanetworkVmegenaPval <- biSapply(fisherWrapperPval,metanetworkList,megenaList,unique(bar$geneName))
+metanetworkVmegenaPval <- t(biSapply(fisherWrapperPval,metanetworkList,megenaList,unique(bar$geneName)))
+metanetworkVmegenaOR <- t(biSapply(fisherWrapperOR,metanetworkList,megenaList,unique(bar$geneName)))
 mNmGThres <- metanetworkVmegenaPval
-mNmGThres[metanetworkVmegenaPval>0.05/(18053)] <- 0
-mNmGThres[metanetworkVmegenaPval<=0.05/(18053)] <- 1
+mNmGThres[metanetworkVmegenaPval>0.05/(18302)] <- 0
+mNmGThres[metanetworkVmegenaPval<=0.05/(18302)] <- 1
 
+
+####fix ordering
+#greedy depth first search
+reSortModuleComparison <- function(x){
+  vec1 <- 1:nrow(x)
+  vec2 <- 1:ncol(x)
+  vec1n <- c()
+  vec2n <- c()
+  p <- min(nrow(x),ncol(x))
+  x2 <- x
+  foo <- min(x2)
+  while(nrow(x2)>0 & ncol(x2) >0 & foo < 0.05/18302){
+    foo <- min(x2)
+    bar <- which(x==foo,T)
+    #print(bar)
+    #print(foo)
+    if((!bar[1]%in%vec1n)&(!bar[2]%in%vec2n)){
+      #cat('here\n')
+      #cat(bar[1],bar[2],'\n')
+      #print(x2)
+      vec1n <- c(vec1n,bar[1])
+      vec2n <- c(vec2n,bar[2])
+      x2 <- x[-vec1n,-vec2n]
+    }
+  }
+  return(list(rowInd=c(vec1n),colInd=c(vec2n)))
+}
+
+foo <- reSortModuleComparison(speakeasyVmetanetworkPval)
+foo2 <- reSortModuleComparison(speakeasyVmegenaPval)
+foo3 <- reSortModuleComparison(metanetworkVmegenaPval)
+
+
+heatmap(sEmNThres[foo$rowInd,foo$colInd],scale='none',Rowv = NA,Colv = NA,col=c('white','grey50'),xlab='SpeakEasy Modules',ylab='Metanetwork Modules',main='')
+heatmap(sEmGThres[foo2$rowInd,foo2$colInd],scale='none',Rowv = NA,Colv = NA,col=c('white','grey50'),xlab='SpeakEasy Modules',ylab='Megena Modules',main='',margins=c(5,6))
+heatmap(mNmGThres[foo3$rowInd,foo3$colInd],scale='none',Rowv = NA,Colv = NA,col=c('white','grey50'),xlab='Metanetwork Modules',ylab='Megena Modules',main='',margins=c(5,6.5))
 
 library(metanetwork)
 
@@ -119,12 +168,36 @@ makeAdjacency <- function(A,B,C){
 
 
 
-fullMat <- makeAdjacency(t(sEmNThres),t(sEmGThres),t(mNmGThres))
-setF <- c(rep(2,46),rep(3,35),rep(4,203))
+fullMat <- makeAdjacency((sEmNThres),(sEmGThres),(mNmGThres))
+setF <- c(rep(2,46),rep(3,36),rep(4,203))
 set1 <- setF == 2 | setF == 3
 set2 <- setF == 2 | setF == 4
 set3 <- setF == 3 | setF == 4
-          
-plot.network(as.network.matrix(fullMat[set1,set1]),vertex.col=c(rep(2,46),rep(3,35),rep(4,203))[set1],usearrows=F)
-plot.network(as.network.matrix(fullMat[set2,set2]),vertex.col=c(rep(2,46),rep(3,35),rep(4,203))[set2],usearrows=F)
-plot.network(as.network.matrix(fullMat[set3,set3]),vertex.col=c(rep(2,46),rep(3,35),rep(4,203))[set3],usearrows=F)
+
+plot.network(as.network.matrix(fullMat),vertex.col=c(rep(2,46),rep(3,36),rep(4,203)),usearrows=F)
+plot.network(as.network.matrix(fullMat[set1,set1]),vertex.col=c(rep(2,46),rep(3,36),rep(4,203))[set1],usearrows=F)          
+plot.network(as.network.matrix(fullMat[set2,set2]),vertex.col=c(rep(2,46),rep(3,36),rep(4,203))[set2],usearrows=F)
+plot.network(as.network.matrix(fullMat[set3,set3]),vertex.col=c(rep(2,46),rep(3,36),rep(4,203))[set3],usearrows=F)
+
+require(igraph)
+g = igraph::graph.adjacency(fullMat, mode = 'undirected', weighted = T, diag = F)
+
+threeWayCliques <- unique(names(unlist(cliques(g,min=3,max=3))))
+mg3 <- grep('comp',threeWayCliques)
+mn3 <- grep('mn',threeWayCliques)
+se3 <- grep('se',threeWayCliques)
+twoWayCliques <- table(names(unlist(cliques(g,min=2,max=2))))
+
+
+#enrichments
+mnEnrObj <- synGet('syn5262001')
+mnEnr <- fread(mnEnrObj@filePath,stringsAsFactors = F,data.table=F)
+mnEnr[1:5,]
+mnEnr <- dplyr::arrange(mnEnr,fdr)
+mnEnr[1:100,]
+ad <- filter(mnEnr,category=='ADRelated')
+ad[1:40,]
+
+go <- dplyr::filter(mnEnr,category=='GO_Biological_Process')
+table(go$ComparisonName)[1:37]
+dplyr::filter(go,ComparisonName=='darkolivegreen')[1:20,]
