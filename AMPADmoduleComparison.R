@@ -182,10 +182,26 @@ plot.network(as.network.matrix(fullMat[set3,set3]),vertex.col=c(rep(2,46),rep(3,
 require(igraph)
 g = igraph::graph.adjacency(fullMat, mode = 'undirected', weighted = T, diag = F)
 
-threeWayCliques <- unique(names(unlist(cliques(g,min=3,max=3))))
+threeWayCliques <- (((cliques(g,min=3,max=3))))
 mg3 <- grep('comp',threeWayCliques)
 mn3 <- grep('mn',threeWayCliques)
 se3 <- grep('se',threeWayCliques)
+
+internal2 <- function(x,y){
+  x <- names(x)
+  print(x)
+  baz <- dplyr::filter(y,speakeasyModule==strsplit(x[1],'se')[[1]][2] & megenaModule==x[3] & metanetworkModule == strsplit(x[2],'mn')[[1]][2])
+  return(unique(baz$hgncName))
+}
+
+genesAcrossModules <- sapply(threeWayCliques,internal2,bar)
+ln1 <- sapply(genesAcrossModules,length)
+cat(genesAcrossModules[[12]],file='~/Desktop/bigOverlap.out',sep='\n')
+cat(unique(bar$hgncName),file='~/Desktop/background.out',sep='\n')
+
+restrictMat <- dplyr::filter(bar,speakeasyModule=='116' & metanetworkModule=='12' & megenaModule=='comp2_4')
+
+
 twoWayCliques <- table(names(unlist(cliques(g,min=2,max=2))))
 
 
