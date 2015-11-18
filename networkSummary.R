@@ -46,6 +46,39 @@ makeFilesForCytoscape <- function(x,networkFile,moduleFile){
   write.csv(mod2,file=moduleFile,quote=F,row.names=F)
 }
 
+
+makeFilesForCytoscape2 <- function(x,networkFile,moduleFile){
+  require(dplyr)
+  nMods <- sum(table(x$modules$moduleNumber)>20)
+  mods <- filter(x$modules,moduleNumber%in%1:nMods)
+  x$network <- x$network %>% as.matrix
+  allAdj <- x$network[mods$GeneIDs,mods$GeneIDs] %>% as.matrix
+  library(metanetwork)
+  alledgeList <- rankedEdgeList(allAdj,symmetric=T)
+  #exprFile <- synGet('syn4259377')
+  #require(data.table);
+  #expr <- fread(exprFile@filePath,header=T)
+  #expr <- data.frame(expr)
+  
+  #hgnc <- expr$hgnc_symbol
+  #names(hgnc) <- expr$ensembl_gene_id
+  hgnc <- rownames(x$network)
+  names(hgnc) <- hgnc
+  
+  alledgeList$var1 <- hgnc[alledgeList$var1]
+  alledgeList$var2 <- hgnc[alledgeList$var2]
+  
+  alledgeList <- filter(alledgeList,!is.na(var1))
+  alledgeList <- filter(alledgeList,!is.na(var2))
+  alledgeList <- filter(alledgeList,var1!='')
+  alledgeList <- filter(alledgeList,var2!='')
+  write.csv(alledgeList,file=networkFile,quote=F,row.names=F)
+  mod2 <- dplyr::select(mods,GeneIDs,modulelabels)
+  mod2$GeneIDs <- hgnc[mod2$GeneIDs]
+  write.csv(mod2,file=moduleFile,quote=F,row.names=F)
+}
+
+
 makeEnrichmentSummary <- function(x){
   require(dplyr)
   require(data.table)

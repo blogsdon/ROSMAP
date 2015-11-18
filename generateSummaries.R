@@ -12,12 +12,18 @@ projectId <- 'syn2397881'
 model <- list()
 
 ####braak
+
+model$overall <- grabNetworkAnalysisResults3(method,sparsityMethod,'NCI_MCI_AD',projectId,'DLPFC')
+
+
 model$rosmapbraak12res<-grabNetworkAnalysisResults3(method,sparsityMethod,'BRAAK12',projectId,'DLPFC')
 model$rosmapbraak34res<-grabNetworkAnalysisResults3(method,sparsityMethod,'BRAAK34',projectId,'DLPFC')
 model$rosmapbraak56res<-grabNetworkAnalysisResults3(method,sparsityMethod,'BRAAK56',projectId,'DLPFC')
 
 adapply <- lapply(model,populateADenrichments)
 enrichSum <- lapply(model,makeEnrichmentSummary)
+
+makeFilesForCytoscape2(model$overall,'rosmapoverallnet.csv','rosmapoverallmod.csv')
 
 makeFilesForCytoscape(model$rosmapbraak12res,'braak12net.csv','braak12mod.csv')
 makeFilesForCytoscape(model$rosmapbraak34res,'braak34net.csv','braak34mod.csv')
