@@ -23,4 +23,4 @@ masterFile <- merge(masterFile,wgcna,by='hgncName')
 masterFile[1:5,]
 dim(masterFile)
 masterFile <- masterFile[,c(2,1,3:6)]
-write.csv(masterFile,'ROSMAP_metanetwork_megena_speakeasy_wgcna_modules.csv',quote=F)
+write.csv(masterFile,'ROSMAP_metanetwork_megena_speakeasy_wgcna_modules.csv',quote=F,row.names=F)
