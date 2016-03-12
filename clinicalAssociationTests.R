@@ -72,7 +72,40 @@ for (i in 1:16){
   eigenGeneList[[i]] <- sapply(modules[[i]],computeEigenGene,combinedData)
   colnames(eigenGeneList[[i]]) <- paste0(names(modules)[i],'_',names(modules[[i]]))
 }
+library(SKAT)
 
+adDiag <- rep(NA,length(combinedData$cogdx))
+adDiag[which(combinedData$cogdx==1)] <- 0
+adDiag[which(combinedData$cogdx==4)] <- 1
+
+
+obj <- SKAT_Null_Model(combinedData$cogdx ~ 1)
+objBraak <- SKAT_Null_Model(combinedData$braaksc ~ 1)
+objCerad <- SKAT_Null_Model(combinedData$ceradsc ~ 1)
+objAdj <- SKAT_Null_Model(adDiag ~ combinedData$age_death + combinedData$educ + combinedData$apoe_genotype + combinedData$msex)
+                          
+fitSkatModel <- function(ind,x,obj){
+  library(dplyr)
+  g <-x[,ind]%>% data.matrix %>% scale
+  res <- SKAT(g,obj,is_check_genotype = F,weights=rep(1,ncol(g)))$p.value
+  return(res)
+}
+
+ad_skat_simple <- vector('list',16)
+braak_skat_simple <- vector('list',16)
+cerad_skat_simple <- vector('list',16)
+
+for (i in 1:16){
+  cat('i:',i,'\n')
+  ad_skat_simple[[i]] <- sapply(modules[[i]],fitSkatModel,combinedData,obj)
+  braak_skat_simple[[i]] <- sapply(modules[[i]],fitSkatModel,combinedData,objBraak)
+  cerad_skat_simple[[i]] <- sapply(modules[[i]],fitSkatModel,combinedData,objCerad)  
+}
+cogdxPval2 <- c(unlist(ad_skat_simple))
+braakPval2 <- c(unlist(braak_skat_simple))
+cerad_skat_simple <- c(unlist(cerad_skat_simple))
+
+matrixA <- cbind(cogdxPval2,braakPval2,cerad_skat_simple)
 
 eigenGeneFullMatrix <- do.call(cbind,eigenGeneList)
 cogdxpval <- rep(0,ncol(eigenGeneFullMatrix))

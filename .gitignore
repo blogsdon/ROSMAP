@@ -90,3 +90,7 @@ rosmapNetworksTauMouse4vs2Mo.cys
 rosmapNetworksTauMouse6Mo.cys
 rosmapNetworksTauMouse8Mo.cys
 rosmapNetworksTest.cys
+nciSummary.xlsx
+runClinicalAssociationTests.Rmd
+runClinicalAssociationTests.html
+runClinicalAssociationTests.pdf
