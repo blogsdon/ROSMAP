@@ -94,3 +94,6 @@ nciSummary.xlsx
 runClinicalAssociationTests.Rmd
 runClinicalAssociationTests.html
 runClinicalAssociationTests.pdf
+rosmapADRNASeq.csv
+rosmapMCIRNASeq.csv
+rosmapNCIRNASeq.csv
