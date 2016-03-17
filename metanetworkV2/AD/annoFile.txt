@@ -1,0 +1,8 @@
+fileType,csv
+dataType,analysis
+analysisType,statisticalNetworkReconstruction
+normalizationStatus,TRUE
+organism,HomoSapiens
+study,ROSMAP
+tissueTypeAbrv,DLPFC
+cogdx,4

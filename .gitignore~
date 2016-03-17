@@ -1,0 +1,32 @@
+.Rproj.user
+.Rhistory
+.RData
+ADrna.csv
+MCIrna.csv
+NCIrna.csv
+code.txt
+data.csv
+syn.txt
+truth.csv
+fullNetwork.png
+rosmap.cys
+test.R
+Rplot.tiff
+enrichmentTest.R
+gwasEnrichment.tiff
+gwasPvalue.tiff
+sparrow2hubDEenrichment.tiff
+sparrow2results.csv
+test.tiff
+.DS_Store
+admod.csv
+adnet.csv
+ncimod.csv
+ncinet.csv
+dataForComparison
+ROSMAP_metanetwork_speakeasy_modules.csv
+<<<<<<< HEAD
+rosmapRNAseq.csv
+=======
+makeConsensus.sh
+>>>>>>> 2d6b27094d5c0eaf0df3835f3765c29d52283274

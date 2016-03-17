@@ -7,13 +7,13 @@ nthreads=319
 s3="s3://metanetworks/ROSMAP/metanetworksV2/AD/"
 
 #location of data file
-dataFile="/shared/ROSMAP/rosmapADRNAseq.csv"
+dataFile="/shared/ROSMAP/metanetworkV2/rosmapADRNAseq.csv"
 
 #location of metanetwork synapse scripts
 pathv="/shared/metanetworkSynapse/"
 
 #output path for temporary result file prior to pushing to s3/synapse
-outputpath="/shared/ROSMAP/metanetworksV2/AD/"
+outputpath="/shared/ROSMAP/metanetworkV2/AD/"
 
 #path within s3
 s3b="ROSMAP/metanetworksV2/AD/"
@@ -22,16 +22,16 @@ s3b="ROSMAP/metanetworksV2/AD/"
 parentId="syn5752534"
 
 #path to csv file with annotations to add to file on Synapse
-annotationFile="/shared/ROSMAP/metanetworksV2/AD/annoFile.txt"
+annotationFile="/shared/ROSMAP/metanetworkV2/AD/annoFile.txt"
 
 #path to csv file with provenance to add to file on synapse
-provenanceFile="/shared/ROSMAP/metanetworksV2/AD/provenanceFile.txt"
+provenanceFile="/shared/ROSMAP/metanetworkV2/AD/provenanceFile.txt"
 
 #path to error output
-errorOutput="/shared/ROSMAP/metanetworksV2/AD/Regressionerror.txt"
+errorOutput="/shared/ROSMAP/metanetworkV2/AD/Regressionerror.txt"
 
 #path to out output
-outOutput="/shared/ROSMAP/metanetworksV2/AD/Regressionout.txt"
+outOutput="/shared/ROSMAP/metanetworkV2/AD/Regressionout.txt"
 
 #job script name
 jobname="ROSMAPRegressionAD"
