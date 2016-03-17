@@ -7,13 +7,13 @@ nthreads=319
 s3="s3://metanetworks/ROSMAP/metanetworksV2/MCI/"
 
 #location of data file
-dataFile="/shared/ROSMAP/rosmapMCIRNAseq.csv"
+dataFile="/shared/ROSMAP/metanetworkV2/rosmapMCIRNAseq.csv"
 
 #location of metanetwork synapse scripts
 pathv="/shared/metanetworkSynapse/"
 
 #output path for temporary result file prior to pushing to s3/synapse
-outputpath="/shared/ROSMAP/metanetworksV2/MCI/"
+outputpath="/shared/ROSMAP/metanetworkV2/MCI/"
 
 #path within s3
 s3b="ROSMAP/metanetworksV2/MCI/"
@@ -22,16 +22,16 @@ s3b="ROSMAP/metanetworksV2/MCI/"
 parentId="syn5752536"
 
 #path to csv file with annotations to add to file on Synapse
-annotationFile="/shared/ROSMAP/metanetworksV2/MCI/annoFile.txt"
+annotationFile="/shared/ROSMAP/metanetworkV2/MCI/annoFile.txt"
 
 #path to csv file with provenance to add to file on synapse
-provenanceFile="/shared/ROSMAP/metanetworksV2/MCI/provenanceFileRegression.txt"
+provenanceFile="/shared/ROSMAP/metanetworkV2/MCI/provenanceFileRegression.txt"
 
 #path to error output
-errorOutput="/shared/ROSMAP/metanetworksV2/MCI/Regressionerror.txt"
+errorOutput="/shared/ROSMAP/metanetworkV2/MCI/Regressionerror.txt"
 
 #path to out output
-outOutput="/shared/ROSMAP/metanetworksV2/MCI/Regressionout.txt"
+outOutput="/shared/ROSMAP/metanetworkV2/MCI/Regressionout.txt"
 
 #job script name
 jobname="ROSMAPRegressionMCI"

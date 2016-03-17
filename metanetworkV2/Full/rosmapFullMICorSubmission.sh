@@ -7,13 +7,13 @@ nthreads=8
 s3="s3://metanetworks/ROSMAP/metanetworksV2/Full/"
 
 #location of data file
-dataFile="/shared/ROSMAP/rosmapRNAseq.csv"
+dataFile="/shared/ROSMAP/metanetworkV2/rosmapRNAseq.csv"
 
 #location of metanetwork synapse scripts
 pathv="/shared/metanetworkSynapse/"
 
 #output path for temporary result file prior to pushing to s3/synapse
-outputpath="/shared/ROSMAP/metanetworksV2/Full/"
+outputpath="/shared/ROSMAP/metanetworkV2/Full/"
 
 #path within s3
 s3b="ROSMAP/metanetworksV2/Full/"
@@ -22,16 +22,16 @@ s3b="ROSMAP/metanetworksV2/Full/"
 parentId="syn5752535"
 
 #path to csv file with annotations to add to file on Synapse
-annotationFile="/shared/ROSMAP/metanetworksV2/Full/annoFile.txt"
+annotationFile="/shared/ROSMAP/metanetworkV2/Full/annoFile.txt"
 
 #path to csv file with provenance to add to file on synapse
-provenanceFile="/shared/ROSMAP/metanetworksV2/Full/provenanceFileMICor.txt"
+provenanceFile="/shared/ROSMAP/metanetworkV2/Full/provenanceFileMICor.txt"
 
 #path to error output
-errorOutput="/shared/ROSMAP/metanetworksV2/Full/marginalerror.txt"
+errorOutput="/shared/ROSMAP/metanetworkV2/Full/marginalerror.txt"
 
 #path to out output
-outOutput="/shared/ROSMAP/metanetworksV2/Full/marginalout.txt"
+outOutput="/shared/ROSMAP/metanetworkV2/Full/marginalout.txt"
 
 #job script name
 jobname="ROSMAPMarginalFull"

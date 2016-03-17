@@ -7,13 +7,13 @@ nthreads=8
 s3="s3://metanetworks/ROSMAP/metanetworksV2/NCI/"
 
 #location of data file
-dataFile="/shared/ROSMAP/rosmapNCIRNAseq.csv"
+dataFile="/shared/ROSMAP/metanetworkV2/rosmapNCIRNAseq.csv"
 
 #location of metanetwork synapse scripts
 pathv="/shared/metanetworkSynapse/"
 
 #output path for temporary result file prior to pushing to s3/synapse
-outputpath="/shared/ROSMAP/metanetworksV2/NCI/"
+outputpath="/shared/ROSMAP/metanetworkV2/NCI/"
 
 #path within s3
 s3b="ROSMAP/metanetworksV2/NCI/"
@@ -22,16 +22,16 @@ s3b="ROSMAP/metanetworksV2/NCI/"
 parentId="syn5752537"
 
 #path to csv file with annotations to add to file on Synapse
-annotationFile="/shared/ROSMAP/metanetworksV2/NCI/annoFile.txt"
+annotationFile="/shared/ROSMAP/metanetworkV2/NCI/annoFile.txt"
 
 #path to csv file with provenance to add to file on synapse
-provenanceFile="/shared/ROSMAP/metanetworksV2/NCI/provenanceFileMICor.txt"
+provenanceFile="/shared/ROSMAP/metanetworkV2/NCI/provenanceFileMICor.txt"
 
 #path to error output
-errorOutput="/shared/ROSMAP/metanetworksV2/NCI/marginalerror.txt"
+errorOutput="/shared/ROSMAP/metanetworkV2/NCI/marginalerror.txt"
 
 #path to out output
-outOutput="/shared/ROSMAP/metanetworksV2/NCI/marginalout.txt"
+outOutput="/shared/ROSMAP/metanetworkV2/NCI/marginalout.txt"
 
 #job script name
 jobname="ROSMAPMarginalNCI"
