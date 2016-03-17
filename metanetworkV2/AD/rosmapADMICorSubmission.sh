@@ -25,7 +25,7 @@ parentId="syn5752534"
 annotationFile="/shared/ROSMAP/metanetworksV2/AD/annoFile.txt"
 
 #path to csv file with provenance to add to file on synapse
-provenanceFile="/shared/ROSMAP/metanetworksV2/AD/provenanceFile.txt"
+provenanceFile="/shared/ROSMAP/metanetworksV2/AD/provenanceFileMICor.txt"
 
 #path to error output
 errorOutput="/shared/ROSMAP/metanetworksV2/AD/marginalerror.txt"
