@@ -16,7 +16,7 @@ pathv="/shared/metanetworkSynapse/"
 outputpath="/shared/ROSMAP/metanetworkV2/Full/"
 
 #path within s3
-s3b="ROSMAP/metanetworksV2/Full/"
+s3b="ROSMAP/metanetworksV2/Full"
 
 #id of folder on Synapse that files will go to
 parentId="syn5752535"
