@@ -3,5 +3,5 @@ syn5581268,FALSE
 syn5581227,FALSE
 https://github.com/blogsdon/metanetwork/commit/549fe5e83e211b326362cb4371b9b2e1f4949c4a,TRUE
 https://github.com/blogsdon/metanetworkSynapse/commit/09c8ef074776d94dea797257c480f418e913ff88,TRUE
-https://github.com/blogsdon/dermalNF/blob/57e042f61f9aaa2b18cbdb513471dd3f58202b9d/dermalNFBuildConsensus.sh,TRUE
+https://github.com/blogsdon/ROSMAP/blob/aa1f0588dc610ae6824dcc3e6c1eddef097487b3/metanetworkV2/NCI/rosmapNCIBuildConsensus.sh,TRUE
 https://github.com/blogsdon/ROSMAP/blob/edf770f68f1f262374b7b83a2892fd188b12a0fe/metanetworkV2/processNewData.R,TRUE
