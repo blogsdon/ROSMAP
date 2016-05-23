@@ -16,24 +16,24 @@ rosmapExpression2 <- t(rosmapExpression[,-c(1,2)])
 colnames(rosmapExpression2) <- rosmapExpression$ensembl_gene_id
 
 #NCI
-rosmapExpression2[dplyr::filter(rosmapCovariates,cogdx==1)$Sampleid_batch,] %>% 
+rosmapExpression2[dplyr::filter(rosmapCovariates,cogdx==1)$Sampleid,] %>%
   apply(2,utilityFunctions::winsorize) %>%
   scale %>%
-  write.csv(file='rosmapNCIRNASeq.csv',quote=F)
+  write.csv(file='rosmapNCIRNAseq.csv',quote=F)
 
 #MCI
-rosmapExpression2[dplyr::filter(rosmapCovariates,cogdx==2)$Sampleid_batch,] %>% 
+rosmapExpression2[dplyr::filter(rosmapCovariates,cogdx==2)$Sampleid,] %>%
   apply(2,utilityFunctions::winsorize) %>%
   scale %>%
-  write.csv(file='rosmapMCIRNASeq.csv',quote=F)
+  write.csv(file='rosmapMCIRNAseq.csv',quote=F)
 
 #AD
-rosmapExpression2[dplyr::filter(rosmapCovariates,cogdx==4)$Sampleid_batch,] %>% 
+rosmapExpression2[dplyr::filter(rosmapCovariates,cogdx==4)$Sampleid,] %>%
   apply(2,utilityFunctions::winsorize) %>%
   scale %>%
-  write.csv(file='rosmapADRNASeq.csv',quote=F)
+  write.csv(file='rosmapADRNAseq.csv',quote=F)
 
 rosmapExpression2 <- apply(rosmapExpression2,2,utilityFunctions::winsorize)
 rosmapExpression2 <- scale(rosmapExpression2)
 
-write.csv(rosmapExpression2,file='rosmapRNASeq.csv',quote=F)
+write.csv(rosmapExpression2,file='rosmapRNAseq.csv',quote=F)

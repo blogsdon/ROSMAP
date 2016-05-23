@@ -1,0 +1,7 @@
+provenance,executed
+syn5581268,FALSE
+syn5581227,FALSE
+https://github.com/blogsdon/metanetwork/commit/55b77c52bf3a55570a06c61ae0bd3434dba77e77,TRUE
+https://github.com/blogsdon/metanetworkSynapse/commit/c3942ffe4d69f681f7fdc25d5fc9267f5e90e2ea,TRUE
+https://github.com/blogsdon/ROSMAP/blob/8925c64207e489853eb65f043189a9b164f4b6bd/metanetworkV2/AD/rosmapADMICorSubmission.sh,TRUE
+https://github.com/blogsdon/ROSMAP/blob/edf770f68f1f262374b7b83a2892fd188b12a0fe/metanetworkV2/processNewData.R,TRUE
