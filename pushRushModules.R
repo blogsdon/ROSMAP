@@ -15,4 +15,9 @@ synSetAnnotations(foo) = list(fileType = 'csv',
                               study = 'ROSMAP',
                               method = 'SpeakEasy',
                               organism = 'HomoSapiens')
-foo = synStore(foo,)
+
+library(githubr)
+
+permLink =githubr::getPermlink('blogsdon/ROSMAP','pushRushModules.R')
+foo = synStore(foo,executed = as.list(permLink))
+#onWeb(foo@properties$id)
